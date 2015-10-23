@@ -1,0 +1,10 @@
+*.log
+*.[oa]
+*.so
+client
+skynet
+tags
+skynet-new
+lualib/protobuf.lua
+lualib/parser.lua
+*.pb

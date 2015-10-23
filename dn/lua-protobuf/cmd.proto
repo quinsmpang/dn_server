@@ -1,0 +1,115 @@
+package message;
+enum CommandType{
+	SysHeartBeat = 1;
+	LoginRequest = 2;
+	LoginResponse = 3;
+	EnterRoomRequest = 4;
+	EnterRoomResponse = 5;
+	SomeoneEnterRoom = 6;
+	ChangeRoomRequest = 7;
+	SitRequest = 8;
+	SitResponse = 9;
+	StandRequest = 10;
+	ForceStandRequest = 11;
+	StandResponse = 12;
+	Quit = 13;
+	SomeoneQuit = 14;
+	ServerIsClosing = 15;
+	ForceStand = 16;
+	ForceQuit = 17;
+
+	C2S_UpdateUserInfo = 18;
+	S2C_UpdateUserInfo = 19;
+	SendChatMsg = 20;
+	Expression = 21;
+	C2S_FriendChat = 22;
+	S2C_FriendChat = 23;
+	S2C_FriendOnline = 24;
+	S2C_FriendOffLine = 25;
+	// 走马灯
+	S2C_BroadCast = 26;
+	C2S_Speaker = 27;
+	S2C_Speaker = 28;
+	S2C_Reconnect = 29;
+	C2S_GetUserInfo = 31;
+	S2C_GetUserInfo = 32;
+	C2S_GetTools = 33;
+	S2C_GetTools = 34;
+	C2S_UseTool = 35;
+	S2C_UseTool = 36;
+	C2S_GetMsg = 37;
+	S2C_GetMsg = 38;
+	C2S_SetMsgReaded = 39;
+	C2S_SendFeedBack = 40;
+	S2C_SendFeedBack = 41;
+	C2S_BuyTool = 42;
+	S2C_BuyTool = 43;
+	C2S_GetToolState = 44;
+	S2C_GetToolState = 45;
+	C2S_GetFriends = 46;
+	S2C_GetFriends = 47;
+	C2S_AddFriend = 48;
+	S2C_AddFriend = 49;
+	C2S_SendChatMsg = 50;
+	S2C_SendChatMsg = 51;
+	C2S_GetInviteAward = 52;
+	S2C_GetInviteAward = 53;
+	C2S_DelFriend = 54;
+	C2S_GetTaskData = 55;
+	S2C_GetTaskData = 56;
+	C2S_GetTaskAward = 57;
+	S2C_GetTaskAward = 58;
+	C2S_GetDaylogAward = 59;
+	S2C_GetDaylogAward = 60;
+	C2S_GetAllActivities = 61;
+	S2C_GetAllActivities = 62;
+	C2S_DelMsg = 63;
+	S2C_DelMsg = 64;
+	C2S_GetTencentDailyAward = 65;
+	S2C_GetTencentDailyAward = 66;
+	C2S_GetTencentGift = 67;
+	S2C_GetTencentGift = 68;
+	C2S_GetTencentVipInfo = 69;
+	S2C_GetTencentVipInfo = 70;
+	C2S_GetInviteInfo = 71;
+	S2C_GetInviteInfo = 72;
+	C2S_SwapInviteAward = 73;
+	S2C_SwapInviteAward = 74;
+	C2S_CountClick = 75;
+	C2S_GetPltFriendAward = 76;
+	S2C_GetPltFriendAward = 77;
+	C2S_GetLoginExtraAward = 78;
+	S2C_GetLoginExtraAward = 79;
+	C2S_GetRegisterAward = 80;
+	S2C_GetRegisterAward = 81;
+	S2C_PaySuccess = 82;
+	S2C_UpdateCoin = 83;
+	C2S_GetLoginAward = 84;
+	S2C_GetLoginAward = 85;
+	C2S_BankruptcyProtection = 86;
+	S2C_BankruptcyProtection = 87;
+}
+
+
+//错误码枚举
+enum ErrorCode{
+	INVALID_SEAT = 1;//无效座位
+	INVALID_ROOM = 2;//无效房间
+	SEAT_UNBAILABLE = 3;//座位有人坐下了
+	INVALID_KEY = 4;//key错误
+	ALREADY_ONLINE = 5;//已经在游戏中
+	SAME_IP = 6;//同ip限制
+	ACCOUNT_LIMIT = 7;//账号被限制
+	GAME_STARTED = 8;//游戏已经开始
+	ROOM_FULL = 9;//房间人数已满
+	LEVEL_LIMIT = 10;//等级限制
+	SERVER_CLOSING = 11;//服务器关闭
+	REPEAT_LOGIN = 12;//账号重复登录
+	ADMIN_OPERATE = 13;//管理员操作
+	PASSWORD_ERR = 14;//密码错误
+	LACK_OF_COIN = 15;//金币不足
+	LACK_OF_CHIPS = 16;//筹码不足
+	NO_PERMISSION = 18;//没权限
+	HOST_QUIT = 20;//房主退出
+	SOCKET_VER_ERR = 99;//socket 版本不兼容
+}

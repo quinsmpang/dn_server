@@ -1,0 +1,558 @@
+package message.commonService;
+message Packet {
+	required int32 cmd 		= 1;
+	required bytes body 		= 2;
+}
+
+//获取我的道具请求1011
+//message C2S_GetTools{
+//	
+//}
+
+//获取我的道具返回1012
+message S2C_GetTools{
+	repeated CS_ToolData tools		=1;						//道具列表
+}
+
+//我的道具数据1013
+message CS_ToolData{
+	required int32 toolType			=1;						//道具类型id
+	required int32 toolId			=2;						//该道具的唯一标识
+	required int32 ownerId			=3;						//道具主人id
+	optional int32 fromId			=4[default = 0];		//赠送者id
+}
+
+//使用道具请求1014
+message C2S_UseTool{
+	required int32 toolId			=1;						//道具唯一id
+}
+
+//使用道具返回1015
+message S2C_UseTool{
+	required bool success			=1;						//是否成功
+	optional int32 toolType			=2;						//道具类型id
+}
+
+//获取信箱消息请求1016
+message C2S_GetMsg{
+	
+}
+
+//获取信箱消息返回1017
+message S2C_GetMsg{
+	repeated CS_MsgData msgList		=1;						//消息列表
+}
+
+//信箱数据1018
+message CS_MsgData{
+	required int32 id				=1;						//消息id
+	required int32 type				=2;						//消息类型 2系统消息3资金明细
+	required string content			=3;						//消息内容
+	required string time			=4;						//时间
+	required bool isReaded			=5;						//是否已读
+}
+
+//设置消息为已读1019
+message C2S_SetMsgReaded{
+	required int32 msgId			=1;						//消息id
+}
+
+//发送反馈请求1020,发送图片反馈仍采用PHP接口
+message C2S_SendFeedBack{
+	required string content			=1;						//反馈内容
+	optional string	environment		=2;						//用户本地环境
+	optional int32 feedType			=3;						//反馈类型 0:错误  1:建议  2:系统
+}
+
+//发送反馈返回1021
+message S2C_SendFeedBack{
+	optional int32 feedId			=1;						//反馈id
+}
+
+//购买道具请求1022
+message C2S_BuyTool{
+	optional int32 toId				=1[default = 0];		//被赠送者id,买给自己为default
+	required int32 toolId			=2;						//道具id
+	optional int32 count			=3[default = 1];		//购买个数，默认为1
+	optional int32 payType			=4[default = 1];		//支付类型 1游戏币 2现金
+}
+
+//购买道具返回1023
+message S2C_BuyTool{
+	optional int32 toId				=1;						//被赠送者id,买给自己为default
+	optional int32 toolId			=2;						//购买的道具类型,购买失败为default
+	optional int32 vipLv			=3[default = -1];		//当前vip等级,购买的不是vip卡,vip等级没发生变化为default
+	optional int32 money			=4;						//金币变化
+	optional int32 payType			=5[default = 1];		//支付类型 1游戏币 2荣誉点 3现金
+	optional int32 cost				=6;						//消费了多少
+}
+
+//获取正在使用中的道具状态请求1024
+message C2S_GetToolState{
+	
+}
+
+//获取正在使用中的道具状态返回1025(包括vip卡的状态)
+message S2C_GetToolState{
+	repeated CS_StateData stateList	=1;						//状态列表
+}
+
+//状态数据1026
+message CS_StateData{
+	required int32 toolId			=1;						//道具id
+	required int32 times			=2;						//剩余次数
+}
+
+//获取好友列表请求1027
+message C2S_GetFriends{
+	
+}
+
+//获取好友列表返回1028
+message S2C_GetFriends{
+	optional bool isPartUpdate		=1[default = true];		//是否只更新有改变的部分,默认为true,false时更新整个列表
+	repeated CS_OnlineUserData list =2;						//好友列表
+}
+
+//在线好友数据1029
+message CS_OnlineUserData{
+	required int32 uid				=1;						//用户id
+	required int32 pfid			=2;							//平台id
+	required string name			=3;						//名字
+	optional int32 lv				=4;						//等级
+	optional string img				=5;						//头像
+	optional string homePage		=6;					//主页
+	optional int32 vipLv			=7;						//vip等级
+	optional int32 friendType		=8;						//好友类型 0本站好友  1牌友   2黑名单
+	optional bool isOnline			=9;						//是否在线
+	optional int32 roomId			=10;						//房间id
+	optional int32 serverId			=11;					//server id
+	optional int32 gameType			=12;					//游戏类型
+	optional int32 pltVipLv			=13;					//平台vip等级,如腾讯黄钻等级,新浪V认证等级
+	optional bool isPltYearVip		=14;					//是否年VIP,如腾讯年费黄钻
+}
+
+//添加好友请求1030
+message C2S_AddFriend{
+	required int32 uid				=1;						//用户id
+}
+
+//添加好友返回1031
+message S2C_AddFriend{
+	optional int32 uid				=1;						//添加成功的好友id,default值为添加失败
+}
+
+//给用户发信息请求1032
+message C2S_SendChatMsg{
+	required int32 uid				=1;						//接收者id
+	required string content			=2;						//消息内容
+}
+
+//给用户发信息返回1033
+message S2C_SendChatMsg{
+	required int32 msgId			=1;						//消息id
+}
+
+
+//获取邀请奖励返回1046
+message C2S_GetInviteAward{
+	
+}
+
+//获取邀请奖励返回1047
+message S2C_GetInviteAward{
+	optional int32 money			=1;						//领取到的钱数
+}
+
+//删除好友请求1048
+message C2S_DelFriend{
+	required int32 friendId			=1;						//好友id
+	optional int32 friendType		=2;						//当前好友类型,0平台好友 1牌友 2黑名单
+	optional int32 delType			=3;						//删除类型 0两边都删除 1不都删除
+}
+
+
+//获取任务列表请求1075
+message C2S_GetTaskData{
+	optional int32 num				=1;						//获取任务条数,默认为获取所有任务
+}
+
+//获取任务列表返回1076
+message S2C_GetTaskData{
+	repeated CS_TaskData list		=1;						//任务列表
+}
+
+//任务数据1077
+message CS_TaskData{
+	optional int32 taskId			=1;						//任务id
+	optional int32 progress			=2;						//完成进度
+	optional bool isGetted			=3;						//是否已领取奖励
+}
+
+//领取任务奖励请求1078
+message C2S_GetTaskAward{
+	optional int32 taskId			=1;						//任务id
+}
+
+//领取任务奖励返回1079
+message S2C_GetTaskAward{
+	optional int32 result			=1;						//是否成功 1成功  0,-1,-2失败,请刷新页面重试  -3已领取
+	optional int32 coin				=2;						//获得金币(包含赠送)
+	optional int32 cash				=3;						//获得大头币(包含赠送)
+	optional int32 extraCoin		=4;						//会员额外赠送的金币
+	optional int32 extraCash		=5;						//会员额外赠送的大头币
+	optional int32 tool				=6;						//获得道具
+}
+
+
+//领取签到奖励请求1086
+message C2S_GetDaylogAward{
+	
+}
+
+//领取签到奖励返回1087
+message S2C_GetDaylogAward{
+	optional int32 money			=1;						//领到的钱
+}
+
+//获取活动开关请求1088
+message C2S_GetAllActivities{
+	
+}
+
+//获取活动开关返回1089
+message S2C_GetAllActivities{
+	repeated bool activities		=1;						//活动开关列表
+}
+
+//删除信件请求1090
+message C2S_DelMsg{
+	repeated int32 msgList			=1;						//信件id列表
+}
+
+//删除信件返回1091
+message S2C_DelMsg{
+	optional int32 count			=1;						//成功删除的个数
+}
+
+
+//领取黄钻每日奖励请求1104
+message C2S_GetTencentDailyAward{
+	
+}
+
+//领取黄钻每日奖励返回1105
+message S2C_GetTencentDailyAward{
+	optional int32 result			=1[default = 1];		//结果 1成功 2已领取过 3不是黄钻
+	optional int32 coin				=2;						//领取到的金币
+	optional int32 toolId			=3;						//道具id
+}
+
+//领取黄钻新手礼包请求1106
+message C2S_GetTencentGift{
+	
+}
+
+//领取黄钻新手礼包返回1107
+message S2C_GetTencentGift{
+	optional int32 result 			=1;						//1领取成功 2已领取过 3未完成新手任务 4不是黄钻
+	optional int32 coin				=2;						//金币奖励
+	optional int32 toolId			=3;						//道具id
+}
+
+//获取用户的黄钻信息请求1108
+message C2S_GetTencentVipInfo{
+	
+}
+
+//获取用户的黄钻信息返回1109
+message S2C_GetTencentVipInfo{
+	optional int32 uid				=1;						//uid
+	optional int32 vipLv			=2;						//黄钻等级
+	optional bool yearVip			=3;						//是否年费黄钻
+	optional bool giftGetted		=4;						//是否已领取黄钻新手礼包
+	optional bool dailyAward		=5;						//是否已领取黄钻每日奖励
+}
+
+//邀请奖励活动获取自己的邀请信息请求1110
+message C2S_GetInviteInfo{
+	
+}
+
+//邀请奖励活动获取自己的邀请信息返回1110
+message S2C_GetInviteInfo{
+	optional int32 total			=1;						//总邀请数
+	optional int32 available		=2;						//可用邀请数
+}
+
+//用邀请好友数兑换奖励请求1111
+message C2S_SwapInviteAward{
+	optional int32 num				=1;						//使用的邀请数量
+	optional int32 type				=2;						//兑换类型 0道具 1钱 2转盘机会
+}
+
+//用邀请好友数兑换奖励返回1112
+message S2C_SwapInviteAward{
+	optional int32 num				=1;						//剩余邀请数
+	optional int32 toolId			=2;						//兑换到的道具id
+	optional int32 coin				=3;						//兑换到的金币
+	optional int32 turnTable		=4;						//兑换到的转盘机会
+}
+//统计用户行为请求1118
+message C2S_CountClick{
+	optional int32 type				=1;						//行为类型
+	optional int32 count			=2;						//点击次数
+}
+
+//领取平台好友个数奖励请求1119
+message C2S_GetPltFriendAward{
+	optional bool getAward			=1;						//是否领取
+}
+
+//领取平台好友个数奖励返回1120
+message S2C_GetPltFriendAward{
+	optional int32 result			=1;						//结果 1成功 0不领取(请求时设置为不领取) -1已领取  -2没有好友
+	optional int32 friendNum		=2;						//好友个数
+	optional int32 award			=3;						//可领取的钱数
+}
+
+//获取连续登陆额外奖励请求1115
+message C2S_GetLoginExtraAward{
+	
+}
+
+//获取连续登陆额外奖励返回1116
+message S2C_GetLoginExtraAward{
+	repeated int32 list				=1;						//道具奖励列表 7天高级解酒药 15天互动道具  30天铜牌会员
+}
+
+//领取注册奖励请求1117
+message C2S_GetRegisterAward{
+	
+}
+
+//领取注册奖励返回1118
+message S2C_GetRegisterAward{
+	optional int32 coin				=1;						//金币奖励
+}
+
+//web页面储值金币成功 1120
+message S2C_PaySuccess{
+	optional int32 coin				=1;						//增加的金币
+}
+
+
+
+
+
+//心跳
+message SysHeartBeat{
+	
+}
+
+//登录请求
+message LoginRequest {
+	required int32 uid 			= 1;//uid
+	required string key 		= 2;//session key
+}
+
+//登录返回
+message LoginResponse {
+	required bool success 		= 1;//是否成功
+	optional int32 errCode 	= 2;//错误码
+	optional string errMsg 		= 3;//错误消息
+}
+
+
+//进房间请求
+message EnterRoomRequest{
+	required int32 roomId 		=1;//房间id
+	required string info		=2;//自定义userInfo信息
+}
+
+//进房间请求返回
+message EnterRoomResponse{
+	required bool success		=1;//是否成功
+	optional int32 roomId		=2;//房间id
+	optional int32 errCode	=3;//错误码
+	optional string errMsg		=4;//错误消息
+}
+
+
+//玩家进入房间
+message SomeoneEnterRoom{
+	required int32 uid 			=1;//uid
+	required string info		=2;//自定义userInfo信息
+}
+
+message ChangeRoomRequest{
+	
+}
+
+//坐下请求
+message SitRequest{
+	required int32 seatId		=1;//座位id
+}
+
+//请求坐下返回
+message SitResponse{
+	required bool success		=1;//是否成功
+	optional int32 errCode	=2;//错误码
+	optional int32 uid			=3;//uid
+	optional int32 seatId		=4;//座位id
+	optional string info		=5;//自定义userInfo信息
+	optional string errMsg		=6;//错误消息
+}
+
+//站起请求
+message StandRequest{
+	optional bool forceStand	=1;//是否直接站起
+}
+
+//直接站起
+message ForceStandRequest{
+	
+}
+
+//请求站起返回
+message StandResponse{
+	required bool success		=1;//请求是否成功
+	optional int32 errCode	=2;//错误码
+	optional int32 uid			=3;//uid
+	optional int32 seatId		=4;//座位id
+	optional string errMsg		=5;//错误消息
+}
+
+//通知server退出房间
+message Quit{
+	
+}
+
+//玩家退出房间
+message SomeoneQuit{
+	required int32 uid			=1;//uid
+}
+
+//服务器即将关闭
+message ServerIsClosing{
+	required int32 time 		=1;//剩余时间
+}
+
+//强制站起
+message ForceStand{
+	required int32 errCode	=1;//原因码
+}
+
+//强制退出
+message ForceQuit{
+	required int32 errCode	=1;//原因码
+}
+
+
+//发送自己的userInfo
+message C2S_UpdateUserInfo{
+	required string userInfo	=1;//userInfo
+}
+
+//更新用户自定义信息
+message S2C_UpdateUserInfo{
+	required int32 uid			=1;//uid
+	required string userInfo	=2;//userInfo
+}
+
+//聊天消息
+message SendChatMsg{
+	required bytes content		=1;//内容
+}
+
+//表情
+message Expression{
+	required int32 type			=3;//表情类型
+	optional int32 seatId		=1;//座位
+	optional int32 coin			=2;//花费
+}
+
+//发送好友聊天
+message C2S_FriendChat{
+	optional int32 uid			=1;//好友的uid
+	optional bytes content		=2;//聊天内容
+}
+
+//收到好友聊天
+message S2C_FriendChat{
+	optional int32 uid			=1;//好友的uid
+	optional bytes content		=2;//聊天内容
+}
+
+//好友上线
+message S2C_FriendOnline{
+	repeated int32 uidList		=1;//玩家列表
+}
+
+//好友下线
+message S2C_FriendOffLine{
+	optional int32 uid			=1;
+}
+
+//走马灯
+message S2C_BroadCast{
+	optional int32 type			=1;//1走马灯 2有图 3无图
+	optional int32 times		=2[default = 3];//播放次数
+	optional string content		=3;//内容
+}
+
+//发送小喇叭
+message C2S_Speaker{
+	optional string content		=1;
+}
+
+//小喇叭消息
+message S2C_Speaker{
+	optional string name		=1;//名字
+	optional string msg			=2;//内容
+}
+
+//分配Server,收到此消息,断开当前socket连接,连接到所分配的server 1119
+message S2C_Reconnect{
+	required string ip				=1;						//ip地址
+	required int32	port			=2;						//端口
+}
+
+//获取用户信息请求108
+message C2S_GetUserInfo{
+	required int32 uid				=1;						//用户id
+}
+
+//获取用户信息返回109
+message S2C_GetUserInfo{
+	optional bool success			=1;						//是否成功
+	optional CS_UserData user		=2;						//用户数据
+}
+
+//用户数据1010
+message CS_UserData{
+	required int32 uid				=1;						//用户id
+	optional int32 coin				=2;						//金币
+	optional int32 level			=3;						//等级
+	optional int32 exp				=4;						//经验
+	optional int32 vipLv			=12;					//vip等级
+	optional string puid			=14;					//平台id
+}
+
+// 更新用户金币 玩家收到这个命令直接更新显示金币数
+message S2C_UpdateCoin {
+	required int32 coin		= 1;
+}
+
+// 金币奖励
+message C2S_GetLoginAward {
+}
+
+message S2C_GetLoginAward {
+	required int32 coin		= 1;
+}
+
+message S2C_BankruptcyProtection {
+	required int32 time		= 1;
+	required int32 coin		= 2;
+}

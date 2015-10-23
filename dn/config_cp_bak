@@ -1,0 +1,18 @@
+
+root = "./"
+thread = 8
+mqueue = 256
+--logger = nil
+logger = "skynet.log"
+harbor = 1
+address = "127.0.0.1:2575"
+master = "127.0.0.1:2072"
+console="127.0.0.1:1274"
+start = "main"
+standalone = "0.0.0.0:2072"
+luaservice = root.."bullfight/?.lua;"..root.."service/?.lua;"..root.."service/?/init.lua"
+--lua_path = root.."service/?.lua;"..root.."lualib/?.lua;"
+cpath = root.."service/?.so"
+protopath = root.."proto"
+redis = root .. "redisconf"
+runasdaemon = 1

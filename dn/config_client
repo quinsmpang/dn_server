@@ -1,0 +1,18 @@
+
+root = "./"
+thread = 8
+mqueue = 256
+--logger = nil
+logger = "skynet_client.log"
+harbor = 1
+address = "127.0.0.1:3257"
+master = "127.0.0.1:3207"
+console="127.0.0.1:3127"
+start = "main"
+standalone = "0.0.0.0:3207"
+luaservice = root.."cpclient/?.lua;"..root.."service/?.lua;"..root.."service/?/init.lua"
+--lua_path = root.."service/?.lua;"..root.."lualib/?.lua;"
+cpath = root.."service/?.so"
+protopath = root.."proto"
+redis = root .. "redisconf"
+runasdaemon = 1

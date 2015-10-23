@@ -1,0 +1,862 @@
+package com.cwin5.dic.net.socket.proto;
+
+message Packet{
+	required int32 type 		= 1;
+	required bytes body			= 2;
+}
+
+message SysHeartBeat{
+
+}
+
+message CMSG_LOGIN{
+	required int32 uid			= 1;
+	required string key			= 2;
+	required string info 		= 3;
+}
+
+message CMSG_LOGIN_OUT{
+
+}
+
+message CMSG_ENTER_ROOM{
+	required int32 roomid			= 1;
+}
+
+message CMSG_QUIT_ROOM{
+}
+
+message CMSG_TRY_QUIT{
+}
+
+message CMSG_SIT	{
+	required int32 seatid 			= 1;
+}			
+
+message CMSG_STAND{
+}
+
+message CMSG_TRY_STAND{
+}		
+
+message CMSG_FAST_ENTER{
+	required int32 roomtype			= 1;
+	required int32 gametype			= 2;
+}
+
+message CMSG_FAST_SIT{
+}
+
+message CMSG_CHANGE_POKER{
+	repeated card cards				= 1;
+}
+
+message CMSG_CHOICE_POKER{
+	required int32 thirdtype		= 1;
+	required int32 sectype			= 2;
+	required int32 firsttype		= 3;
+	repeated card cards				= 4;	
+}
+
+message CMSG_CHOICE_SP_TYPE{
+}
+
+message CMSG_ROOM_CHAT{
+	required string msg				= 1;
+}
+
+message CMSG_CHAT_TO{	
+	required int32 id				= 1;
+	required string msg				= 2;
+}
+
+message CMSG_CHANGE_ROOM{
+}
+
+message CMSG_UPDATE_FRIEND{
+	repeated int32 uids				= 1;
+}
+
+message CMSG_BROADCAST{
+	required int32 toolid			= 1;
+	required string msg				= 2;
+}
+
+message CMSG_FACE{
+	required int32 faceid			= 1;
+}
+
+message CMSG_ADD_FRIEND{
+	required int32 fid				= 1;
+}
+
+message CMSG_DEL_FRIEND{
+	required int32 fid				= 1;
+}
+
+message CMSG_GET_SAFE_BOX{
+}
+
+message CMSG_CREAT_SAFE_BOX{
+	required string pwd				= 1;
+	required string question		= 2;
+	required string answer			= 3;
+}
+
+message CMSG_LOGIN_SAFE_BOX{
+	required string pwd				= 1;
+}
+
+message CMSG_COIN_SAFE_BOX{
+	required int32 type				= 1;
+	required int32 money			= 2;
+}
+
+message CMSG_GET_PWD{
+	required string question		= 1;
+	required string answer			= 2;
+}
+
+message CMSG_SAFE_BOX_CHANGE_PWD{
+	required string newpwd			= 1;
+	required string oldpwd			= 2;
+}
+
+message CMSG_SB_CHANGE_QUESTION{
+	required string question		= 1;
+	required string answer			= 2;
+	required string newquestion		= 3;
+	required string newanswer		= 4;
+}
+
+message CMSG_GET_PLAYER_GAMEINFO{
+	required int32 uid				= 1;
+}
+
+message CMSG_FREE_FACE_CONF{
+}
+
+message CMSG_SELF_TOOLS_CONF{
+}
+
+message CMSG_TASK_NEW_PLAYER{
+}
+
+message CMSG_SYSTEM_ERROR{
+	optional string errors			= 1;
+	optional string env				= 2;
+}
+
+message CMSG_GOODS_DESCRIBE{
+}
+
+message CMSG_USE_TOOL{
+	required int32 toolid			= 1;
+}
+
+message CMSG_GET_TASK_REWARD{
+	required int32 taskid			= 1;
+}
+
+message CMSG_HEART_BEAT{
+}
+
+message CMSG_BF_POKER_TYPE{
+	required int32 pokertype		= 1;
+	repeated card cards				= 2;
+}
+
+message CMSG_BET{
+	required int32 betmoney			= 1;
+}
+
+message CMSG_BET_WISHING_WELL{
+	required int32 sign				= 1;
+}
+
+message CMSG_UPDATE_WISHING_WELL{
+}
+
+message CMSG_WISHING_WIN_LIST{
+}
+
+
+message CMSG_EXCHANGE_MONEY {
+	required int32 goodsid			= 1;
+	required int32 platform			= 2;
+	optional int32 count			= 3;	
+}
+
+
+
+
+
+
+message SMSG_SOMEONE_CHOICE_SP{
+	required int32 uid				= 1;
+	optional int32 errcode			= 2;
+}
+
+message SMSG_LOGIN_SUCC{
+	required int32 roomid			= 1;
+	required int32 money			= 2;
+	optional int32 vip				= 3;
+	optional int32 ldays			= 4;
+	optional int32 score			= 5;
+	optional int32 winnum			= 6;
+	optional int32 losenum			= 7;
+	optional int32 drawnum			= 8;
+	optional int32 mwin				= 9;
+	optional int32 mlose			= 10;
+	optional int32 mdraw			= 11;
+	optional string title			= 12;
+	optional int32 loginreward		= 13;
+	optional int32 vipreward		= 14;
+	optional int32 toolreward		= 15;
+	optional bool task_new			= 16;
+	optional bool firstlogin		= 17;
+	optional int32 qq_vip			= 18;
+	optional float dtmoney			= 19;
+	optional int32 firstbuy			= 20;
+}
+
+message SMSG_LOGIN_FAILD{
+	optional int32 errcode			= 1;
+}
+
+message SMSG_LOGOUT_SUCC{
+}
+
+message SMSG_SOMEONE_ENTER{
+	required int32 uid					= 1;
+	required string info				= 2;
+}
+
+message SMSG_ENTER_ROOM_FAILD{
+	optional int32 errcode				= 1;
+}
+
+message SMSG_ENTER_ROOM_SUCC{
+	required int32 roomid				= 1;
+}
+
+message seater {
+	required int32 uid					= 1;
+	required int32 seatid				= 2;
+}
+
+message SMSG_SOMEONE_SIT{
+	repeated seater seaters				= 1;
+}
+
+message SMSG_UP_GAME_DATA {
+	required int32 uid					= 1;
+	required int32 money				= 2;
+	required int32 score				= 3;
+	required int32 vip					= 4;
+}
+
+message SMSG_SIT_FAILD{
+	optional int32 errcode				= 1;
+}
+
+message SMSG_SOMEONE_STAND{
+	required int32 uid						= 1;
+	required int32 seatid				= 2;
+}
+
+message SMSG_STAND_FAILD{
+	optional int32 errcode				= 1;
+}
+
+message SMSG_SOMEONE_QUIT{
+	required int32 uid						= 1;
+}
+
+message SMSG_QUIT_FAILD{
+	optional int32 errcode				= 1;
+}
+
+message SMSG_TAKE_FEE{
+	repeated int32 uids 				= 1;
+	required int32 money				= 2;
+	required int32 bankerfee			= 3;
+}
+
+message card{
+	required int32 point				= 1;
+	required int32 suit					= 2;	
+}
+
+message SMSG_DEAL_POKER{
+	repeated card cards					= 1;
+	optional int32 sptype				= 2;
+}
+
+message SMSG_FORCE_QUIT_GAME{
+	required int32 uid					= 1;
+	required int32 losemoney			= 2;
+}
+
+message SMSG_CHANGE_POKER{
+	required int32 time					= 1;
+}
+
+message SMSG_SOMEONE_CHANGE{
+	required bool succ					= 1;
+	optional int32 uid					= 2;
+	optional int32 num					= 3;
+}
+
+message SMSG_SOMEONE_CHOICE{
+	required int32 uid					= 1;
+	optional int32 errcode				= 2;
+}
+
+message SMSG_CHOICE_POKER{
+	optional int32 sptype				= 1;
+}
+
+message playerconf{
+	required int32 uid					= 1;
+	repeated card cards					= 2;
+	required int32 thirdtype			= 3;
+	required int32 sectype				= 4;
+	required int32 firsttype			= 5;
+	required int32 sptype				= 6;
+}
+
+message compareconf{
+	required int32 uid					= 1;
+	required int32 firstadd				= 2;
+	required int32 secadd				= 3;
+	required int32 thirdadd				= 4;
+	required int32 totaladd				= 5;	
+}
+
+message shootconf{
+	required int32 shooter				= 1;
+	required int32 shooted				= 2;
+}
+
+message SMSG_COMPARE_POKER{
+	repeated playerconf playerconfs		= 1;
+	repeated compareconf compareconfs	= 2;
+	repeated shootconf	shoot			= 3;
+	required int32 shootallid			= 4;
+}
+
+message result{
+	required int32 uid					= 1;
+	optional int32 nomaladd				= 2;
+	optional int32 spadd				= 3;
+	required int32 winmoney				= 4;	
+	repeated card cards					= 5;
+}
+
+message SMSG_SHOW_RESULT{
+	repeated result results				= 1;
+}
+
+message SMSG_GAME_OVER{
+}
+
+message SMSG_GAME_OVER_AHEAD{
+}
+
+message users_state{
+	required int32 uid					= 1;
+	required int32 state				= 2;
+	optional int32 changenum			= 3;
+	optional int32 sptype				= 4;
+}
+
+message SMSG_RESUME_GAME{
+	repeated users_state users			= 1;
+	repeated card cards					= 2;
+	optional int32 lefttime				= 3;
+	optional int32 selfsptype			= 4;
+}
+
+
+message SMSG_CHANGE_RETURN{
+	optional bool shulff				= 1;
+	repeated card cards					= 2;
+}
+
+message SMSG_NO_MONEY_KICK{
+	optional int32 errcode				= 1;
+}
+
+message SMSG_UPDATE_ROOMCONF{
+	optional int32 basebet				= 1;
+	optional int32 minmoney				= 2;
+	optional int32 choicetime			= 3;	
+}
+
+message SMSG_BROADCAST{
+	required int32 num					= 1;
+	required string msg					= 2;
+}
+
+message SMSG_ADD_MONEY{	
+	required int32 uid					= 1;
+	optional int32 addid				= 2;
+	required int32 money				= 3;
+	optional int32 protectnum			= 4;
+}
+
+message SMSG_SEND_DTMONEY {
+	required int32 uid					= 1;
+	optional int32 addid				= 2;
+	required int32 dtmoney				= 3;	
+}
+
+
+
+message table{
+	required int32 tid					= 1;
+	required int32 tplayer				= 2;
+}
+
+message CMSG_TABLE_GETALL{
+	required int32 type					= 1;
+}
+
+message CMSG_GET_TOP_LIST{
+	required int32 topid				= 1;
+}
+
+message CMSG_GET_HONOR_LIST{
+}
+
+message CMSG_SOME_ONE_GRAB{
+	required int32 sign					= 1;
+}
+
+message SMSG_TABLE_GETALL{
+	required int32 type					= 1;
+	repeated table tables				= 2;	
+}
+
+message SMSG_ROOM_CHAT{
+	optional int32 uid					= 1;
+	required string msg					= 2;
+}
+
+message SMSG_CHAT_TO{	
+	optional int32 uid					= 1;
+	required string msg					= 2;
+}
+
+message friend_state{
+	required int32 uid					= 1;
+	optional bool login					= 2;
+	optional int32 roomid				= 3;
+}
+
+message SMSG_UPDATE_FRIEND_STATE{
+	repeated friend_state friends		= 1;
+}
+
+message SMSG_FACE{
+	required int32 uid					= 1;
+	required int32 faceid				= 2;
+	required int32 cost					= 3;
+}
+
+message SMSG_TIMEOUT_KICK{
+}
+
+message SMSG_SERVER_CLOSE{
+}
+
+message SMSG_TASK{	
+	required int32 taskid				= 1;
+	optional int32 schedule				= 2;
+}
+
+message SMSG_ADD_FRIEND{
+	required int32 fid					= 1;
+}
+
+message SMSG_DEL_FRIEND{
+	required int32 fid					= 1;
+}
+
+message SMSG_CREAT_SAFE_BOX{
+	required bool succ					= 1;
+}
+
+message SMSG_LOGIN_SAFE_BOX{
+	required bool succ					= 1;
+	optional int32 money				= 2;
+	optional int32 errcode				= 3;
+}
+
+message SMSG_COIN_SAFE_BOX{
+	required bool succ					= 1;
+}
+
+message SMSG_SAFE_BOX_PWD{
+	required bool succ					= 1;
+	optional string pwd					= 2;
+}
+
+message SMSG_SAFE_BOX_CHANGE_PWD{
+	required bool succ					= 1;
+}
+
+message SMSG_SB_CHANGE_QUESTION{
+	required bool succ					= 1;
+}
+
+message SMSG_PLAYER_GAMEINFO{
+	required int32 uid					= 1;
+	required int32 money				= 2;
+	optional int32 vip					= 3;
+	required int32 score				= 4;
+	optional int32 winnum				= 5;
+	optional int32 losenum				= 6;
+	optional int32 drawnum				= 7;
+	optional int32 mwinnum				= 8;
+	optional int32 mlosenum				= 9;
+	optional int32 mdrawnum				= 10;
+	required string title				= 11;				
+	optional string puid				= 12;
+	optional string besttype			= 13;
+}
+
+message SMSG_FREE_FACE_CONF{
+	optional int32 endtime				= 1;
+}
+
+message tool{
+	required int32 id					= 1;
+	required int32 typeid				= 2;
+	optional int32 endtime				= 3;
+	optional int32 num					= 4;
+}
+
+message SMSG_SELF_TOOLS_CONF{
+	repeated tool tools					= 1;
+}
+
+message SMSG_TASK_NEW_PLAYER{
+	required bool succ					= 1;
+	optional int32 money				= 2;
+}
+
+message goods_describe{
+	required int32 id					= 1;
+	required string describe			= 2;
+	required int32 type					= 3;
+	required string img					= 4;
+	required string title				= 5;
+	required int32 price				= 6;
+	optional int32 state				= 7;
+	required int32 addmoney				= 8;
+}
+
+message SMSG_GOODS_DESCRIBE{
+	repeated goods_describe goods		= 1;	
+}
+
+message SMSG_SHOP{
+	required int32 uid					= 1;
+	optional int32 fid					= 2;
+	required int32 goodsid				= 3;
+	required int32 num					= 4;
+	optional int32 addmoney				= 5;
+	optional int32 score				= 6;
+	optional int32 vip					= 7;
+	optional float cowprice				= 8;
+}
+
+message notice{
+	required int32 id					= 1;
+	optional string name				= 2;
+	required int32 sdate				= 3;
+	required int32 edate				= 4;
+	optional int32 type					= 5;
+	required string content				= 6;
+	optional int32 adminid				= 7;
+}
+
+message SMSG_UPDATE_NOTICE{
+	repeated notice notices				= 1;
+}
+
+message SMSG_USE_TOOL{
+	required int32 uid					= 1;
+	optional bool succ					= 2;
+	optional int32 toolid				= 3;
+	optional int32 addmoney				= 4;
+	optional int32 addscore				= 5;
+	optional int32 vip					= 6;
+}
+
+message SMSG_SELF_BOX{
+	required int32 state				= 1;
+}
+
+message SMSG_ADMIN_BROADCAST{
+	required int32 num					= 1;
+	required string msg					= 2;
+}
+
+message SMSG_PLAY_ONE_MATCH{
+	required int32 sign					= 1;	
+}
+
+message SMSG_SEND_TASK_REWARD{
+	required int32 uid					= 1;
+	required bool succ					= 2;
+	required int32 taskid				= 3;
+	optional int32 money				= 4;
+}
+
+message task{
+	required int32 taskid				= 1;
+	required int32 complete				= 2;
+	required bool curstate				= 3;
+	optional int32 money				= 4;
+	optional float cow					= 5;
+	optional int32 playpoint			= 6;
+	optional int32 rtype				= 7;
+	optional int32 dayplaynum			= 8;	
+}
+
+message SMSG_TASKCONF{
+	required int32 daywin				= 1;
+	required int32 dayplay				= 2;
+	repeated task tasks					= 3;
+}
+
+message SMSG_A_NEW_DAY{
+}
+
+message SMSG_SHUT_DOWN{
+}
+
+message player_info{
+	required int32 uid					= 1;
+	required int32 money				= 2;
+	required int32 score				= 3;
+	required string info				= 4;
+	optional int32 qq_vip				= 5;
+	required int32 vip					= 6;
+}
+
+message player_info_honor {
+	required string info				= 1;
+	required int32 honor				= 2;
+}
+
+message player_info_last {
+	required string info				= 1;
+}
+
+message SMSG_GET_LAST_LIST {
+	required int32 onetime				= 1;
+	repeated player_info_last lastinfo	= 2;
+}
+
+message CMSG_GET_LAST_LIST {
+		
+}
+
+message SMSG_BET_WSHING_WELL{
+	required int32 uid					= 1;
+	required bool succ					= 2;
+	optional int32 money				= 3;
+	optional int32 errcode				= 4;
+}
+
+message SMSG_WISHING_REWARD{
+	required int32 uid					= 1;
+	required string name				= 2;
+	required int32 sptype				= 3;
+	required int32 money				= 4;
+}
+
+message SMSG_UPDATE_WISHING_WELL{
+	required int32 money				= 1;
+}
+
+message wishing_winconf{
+	required string name				= 1;
+	required int32 sptype				= 2;
+	required int32 money				= 3;
+	required int32 time					= 4;
+}
+
+message SMSG_WISHING_WIN_LIST{
+	repeated wishing_winconf winners	= 1;
+}
+
+
+message SMSG_SOME_ONE_GRAB_BANKER{
+	required int32 uid					= 1;
+	required int32 sign					= 2;
+}
+
+message SMSG_TOP_LIST{
+	required int32 topid				= 1;
+	repeated player_info players_info	= 2;
+}
+
+message SMSG_HONOR_LIST {
+	required int32 weeksort			= 1;
+	required int32 dayhonor			= 2;
+	required int32 weekhonor		= 3;
+	repeated player_info_honor day	= 4;
+	repeated player_info_honor week	= 5;
+}
+
+message SMSG_GRAB_BANKER{
+	required int32 time					= 1;
+	required int32 type					= 2;
+}
+
+message SMSG_NOTIFY_THE_BANKER{
+	required int32 uid					= 1;
+	required int32 type					= 2;
+}
+
+message SMSG_SOME_ONE_BET{
+	required int32 uid					= 1;
+	required int32 money				= 2;
+	optional int32 errcode				= 3;
+}
+
+message bf_result{
+	required int32 uid					= 1;
+	required int32 totaladd				= 2;
+	required int32 winmoney				= 3;
+	optional int32 pokertype			= 4;
+	repeated card cards					= 5;
+}
+
+message SMSG_BF_SHOW_RESULT{
+	repeated bf_result results			= 1;
+}
+
+message bf_users_state{
+	required int32 uid					= 1;
+	required int32 state				= 2;
+	optional int32 pokertype			= 3;
+	repeated card cards					= 4;
+	optional int32 grabsign				= 5;
+	optional int32 betmoney				= 6;
+}
+
+message SMSG_BF_RESUME_GAME{
+	repeated bf_users_state	states		= 1;
+	optional int32 lefttime				= 2;	
+	optional int32 banker				= 3;
+}
+
+message SMSG_BF_SOME_ONE_CHOICE{
+	required int32 uid					= 1;
+	required bool succ					= 2;
+	optional int32 cardstype			= 3;
+	repeated card cards					= 4;
+}
+
+message SMSG_BF_GAME_START{
+	required int32 players				= 1;
+	repeated int32 uids					= 2;
+}
+
+message SMSG_NOTIFY_BET{
+	required int32 time					= 1;
+}
+
+message SMSG_DEMAND_MONEY_WINDOW {
+	required int32 num					= 1;
+}
+
+message CMSG_CHOICE_FRIEND_DEMAND {
+	repeated int32 fids					= 1;
+}
+
+message SMSG_CHOICE_FRIEND_DEMAND {
+	required int32 sourceid				= 1;
+}
+
+message CMSG_REPLY_DEMAND_MONEY {
+	required int32 num					= 1;
+	required int32 uid					= 2;
+	required string fromName			= 3;
+	required string toName				= 4;
+}
+
+message SMSG_REPLY_DEMAND_MONEY {
+	required int32 num					= 1;	
+	required string fromName			= 2;
+	required string toName				= 3;
+}
+
+message SMSG_HEART_BEAT {
+}
+
+message CMSG_GET_FRIEND_MONEY_SUCC {
+}
+
+message SMSG_OVER_LOSE_LIMIT {
+	required int32 errcode				= 1;	
+}
+
+message CMSG_GET_ONLINE {
+}
+
+message online_info {
+	required int32 uid					= 1;
+	optional string name				= 2;
+	optional string head				= 3;
+	required int32 sex					= 4;
+}
+
+message SMSG_GET_ONLINE {
+	repeated online_info infos			= 1;
+}
+
+message CMSG_GET_ONLINEINFO {
+	required int32 uid					= 1;	
+}
+
+message SMSG_GET_ONLINEINFO {
+	required int32 roomid				= 1;
+	required int32 money				= 2;
+	required int32 score				= 3;
+}
+
+message SMSG_SCRATCH_TIME {
+	required int32 time					= 1;	
+}
+
+message CMSG_GET_SCRATCH_REWARD {
+	
+}
+
+message SMSG_SCRATCH_SEND_REWARD {
+	required int32 uid					= 1;
+	required int32 kind					= 2;
+	required int32 money				= 3;
+	required int32 dtmoney				= 4;	
+}
+
+message SMSG_RED_PACKET {
+	required int32 time					= 1;	
+}
+
+message CMSG_GET_REDPACKET_REWARD {
+	
+}
+
+message SMSG_GET_REDPACKET_REWARD {
+	required int32 uid					= 1;
+	required int32 kind					= 2;
+	required int32 money				= 3;	
+}
